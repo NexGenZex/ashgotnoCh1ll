@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fun Project by Ash</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+        body {
+            text-align: center;
+            font-family: 'Orbitron', sans-serif;
+            background: url('https://i.pinimg.com/originals/67/f5/18/67f518cbaa91cb069d245b107d05b52d.jpg') no-repeat center center/cover;
+            color: #a020f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .hidden { display: none; }
+        .bold { font-size: 24px; font-weight: bold; text-shadow: 0 0 10px #a020f0; }
+        .btn {
+            background: transparent;
+            border: 2px solid #a020f0;
+            color: #a020f0;
+            padding: 10px 20px;
+            font-size: 18px;
+            margin: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn:hover { background: #a020f0; color: black; }
+        .watermark {
+            font-size: 18px;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            opacity: 0.8;
+            font-family: 'Brush Script MT', cursive;
+            font-weight: bold;
+            animation: bloom 2s infinite alternate;
+        }
+        @keyframes bloom {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.2); }
+        }
+        .nickname-input {
+            padding: 10px;
+            font-size: 20px;
+            width: 250px;
+            border: 2px solid #a020f0;
+            background: black;
+            color: #a020f0;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="intro">
+        <p class="bold">Enter Your Nickname</p>
+        <input type="text" class="nickname-input" placeholder="Type here...">
+        <br>
+        <button class="btn" onclick="startQuiz()">Enter</button>
+    </div>
+
+    <div id="question1" class="hidden">
+        <p class="bold">What is my favorite movie?</p>
+        <button class="btn" onclick="nextQuestion(2, false)">Batman</button>
+        <button class="btn" onclick="nextQuestion(2, false)">Tarzen The Wonder Car</button>
+        <button class="btn" onclick="nextQuestion(2, true)">Chota Bheem vs Kirmada</button>
+        <button class="btn" onclick="nextQuestion(2, false)">Interstellar</button>
+    </div>
+
+    <div id="question2" class="hidden">
+        <p class="bold">What is my favorite song?</p>
+        <button class="btn" onclick="nextQuestion(3, false)">Believer</button>
+        <button class="btn" onclick="nextQuestion(3, false)">Shape of You</button>
+        <button class="btn" onclick="nextQuestion(3, true)">Motu Patlu Theme Music</button>
+    </div>
+
+    <div id="question3" class="hidden">
+        <p class="bold">Who is my favorite actor?</p>
+        <button class="btn" onclick="showResult(false)">Leonardo DiCaprio</button>
+        <button class="btn" onclick="showResult(false)">Johnny Depp</button>
+        <button class="btn" onclick="showResult(true)">Deepak Kalal</button>
+    </div>
+
+    <div id="correct" class="hidden">
+        <img src="https://gifdb.com/images/high/animated-funny-batman-walking-ipihw12ruqjb2crd.gif" alt="Batman">
+        <p class="bold">Congo! Answer is right...</p>
+        <p class="bold">Fokus on your carreeeeeeer bekoz sexsus is parma nand</p>
+    </div>
+
+    <div id="wrong" class="hidden">
+        <img src="https://gifdb.com/images/high/humorous-big-belly-batman-5nrev6lrf02innpd.gif" alt="Chup Gawar">
+        <p class="bold">Wrong answers bhai, bahut gawar tu! Firse try kar!</p>
+    </div>
+
+    <p class="watermark">Made by Ash</p>
+
+    <script>
+        let wrongAnswerSelected = false;
+
+        function startQuiz() {
+            document.getElementById('intro').classList.add('hidden');
+            document.getElementById('question1').classList.remove('hidden');
+        }
+
+        function nextQuestion(qNum, isCorrect) {
+            if (!isCorrect) {
+                wrongAnswerSelected = true;
+            }
+            document.getElementById('question' + (qNum - 1)).classList.add('hidden');
+            document.getElementById('question' + qNum).classList.remove('hidden');
+        }
+
+        function showResult(isCorrect) {
+            if (!isCorrect) {
+                wrongAnswerSelected = true;
+            }
+            document.getElementById('question3').classList.add('hidden');
+            if (wrongAnswerSelected) {
+                document.getElementById('wrong').classList.remove('hidden');
+            } else {
+                document.getElementById('correct').classList.remove('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
